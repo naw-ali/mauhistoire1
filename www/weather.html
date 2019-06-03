@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!--script src="cordova.js"></script-->
+
+<link rel="stylesheet" type="text/css" href="jquery.mobile-1.4.5.css">
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="jquery.mobile-1.4.5.js"></script>
+
+
+
+<style>
+
+@import url('https://fonts.googleapis.com/css?family=Dosis');
+
+#pageone {
+  background: no-repeat center center fixed;
+  background-size: cover;
+}
+
+.city {
+  padding: 50px 0 10px 0;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+.container {
+  margin: 0 auto;
+  padding: 0;
+  width: 330px;
+  height: 460px;
+  background-size: cover;
+  border-radius: 3px;
+  position: relative;
+  -webkit-box-shadow: 2px 3px 7px 0px rgba(50, 50, 50, 0.8);
+  -moz-box-shadow: 2px 3px 7px 0px rgba(50, 50, 50, 0.8);
+  box-shadow: 2px 3px 7px 0px rgba(50, 50, 50, 0.8);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.city-title,
+.city-weather-temperature,
+.city-weather-description,
+.city-weather-icon {
+  box-sizing: border-box;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  text-align: center;
+  color: #323D54;
+  margin: auto;
+  display: block;
+}
+
+.city-title {
+  font-size: 2.5em;
+  padding-top: 25px;
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(20, 24, 33, 0), rgba(20, 24, 33, 0.75), rgba(20, 24, 33, 0));
+  width: 60%;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+.city-weather-temperature {
+  font-size: 4em;
+}
+
+.city-weather-description {
+  font-size: 1.2em;
+  width: 200px;
+  margin: auto;
+  text-align: center;
+}
+
+.content {
+  position: absolute;
+  bottom: 0px;
+  z-index: 9999;
+}
+
+.wi {
+  display: inline-block;
+  font-family: 'weathericons';
+  color: #323D54;
+  font-size: 7.5em;
+  line-height: 1.3em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#smallIcon {
+  font-size: 2em;
+  margin-top: 5px;
+}
+.add-info {
+  text-align: left;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  font-size: 1em;
+  color: #323D54;
+}
+
+.bottom {
+  width: 330px;
+  margin: 0;
+  padding-top: 0;
+  position: absolute;
+  bottom: 0px;
+  z-index: 9999;
+}
+
+.nav-info {
+  background: rgba(255, 255, 255, 0.4);
+}
+
+ul {
+  margin-bottom: 0;
+  text-align:center;
+}
+
+#details {
+  display: flex;
+}
+
+ul {
+  justify-content:  space-between;
+  list-style-type: none;
+  padding: 0px 35px 0px 35px;
+  margin-top:-10px;
+}
+
+.celsius {
+  cursor: pointer;
+}
+
+.fahrenheit {
+  cursor: pointer;
+}
+
+.celsius:hover {
+  color: #fff;
+}
+
+.fahrenheit:hover {
+  color: #fff;
+}
+
+.date{
+  font-size: 0.8em;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  color: #323D54;
+  float: left;
+  margin: 8px 5px 2px 10px;
+}
+
+#forio{
+  font-size: 0.8em;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  color: #323D54;
+  float: right;
+  margin: 8px 5px 2px 10px;
+}
+#forio:hover {
+  font-size: 0.8em;
+  font-family: 'Dosis', sans-serif;
+  font-weight: bold;
+  color: #fff;
+  float: right;
+  margin: 8px 5px 2px 10px;
+  text-decoration: none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+  <script>
+var city_name;
+
+    function f2()
+{
+  
+  var param = window.location.href.split( '?' );
+  var c = param[1].split('=');
+  alert(c[1]);
+  city_name = c[1];
+
+};
+
+
+    
+  	function weatherBalloon() {
+  		var city = city_name;
+  var key = 'b8317e0dc306f7d5d1dd2d464c913abd';
+  fetch('https://api.openweathermap.org/data/2.5/weather?q=' + city + '&units=metric' + '&appid=' + key)  
+  .then(function(resp) { return resp.json() }) // Convert data to json
+  .then(function(data) {
+    console.log(data);
+    drawWeather(data);
+  })
+  .catch(function() {
+    // catch any errors
+    alert("An error occured");
+  });
+}
+
+function drawWeather( d ) {
+	var celcius = d.main.temp;
+	var description = d.weather[0].description;
+	var icon = d.weather[0].icon;
+	
+	document.getElementById('description').innerHTML = description;
+	document.getElementById('temp').innerHTML = celcius + '&deg;';
+	document.getElementById('location').innerHTML = d.name;
+
+	if (icon == "01d"){
+		document.getElementById("icon").src = "images/01d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/sun.jpg')";
+	} else if ( icon == "02d" ) {
+		document.getElementById("icon").src = "images/02d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/sun-cloud.png')";
+	} else if ( icon == "03d" ) {
+		document.getElementById("icon").src = "images/03d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/cloud.jpg')";
+	} else if ( icon == "04d" ) {
+		document.getElementById("icon").src = "images/04d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/broken.png')";
+	} else if ( icon == "09d" ) {
+		document.getElementById("icon").src = "images/09d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/shower-rain.png')";
+	} else if ( icon == "10d" ) {
+		document.getElementById("icon").src = "images/10d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/rain.png')";
+	} else if ( icon == "11d" ) {
+		document.getElementById("icon").src = "images/11d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/thunder.jpg')";
+	} else if ( icon == "50d" ) {
+		document.getElementById("icon").src = "images/50d.png";
+		document.getElementById("pageweather").style.backgroundImage = "url('images/mist.jpg')";
+	}
+
+  if (icon == "01n"){
+    document.getElementById("icon").src = "images/01n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/clear-night.jpg')";
+  } else if ( icon == "02n" ) {
+    document.getElementById("icon").src = "images/02n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/scattered-night.png')";
+  } else if ( icon == "03n" ) {
+    document.getElementById("icon").src = "images/03n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/scattered-night.png')";
+  } else if ( icon == "04n" ) {
+    document.getElementById("icon").src = "images/04n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/broken-night.png')";
+  } else if ( icon == "09n" ) {
+    document.getElementById("icon").src = "images/09n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/shower-night.jpg')";
+  } else if ( icon == "10n" ) {
+    document.getElementById("icon").src = "images/10n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/rain-night.png')";
+  } else if ( icon == "11n" ) {
+    document.getElementById("icon").src = "images/11n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/thunder-night.jpg')";
+  } else if ( icon == "50n" ) {
+    document.getElementById("icon").src = "images/50n.png";
+    document.getElementById("pageweather").style.backgroundImage = "url('images/mist.jpg')";
+  }
+}
+
+window.onload = function() {
+  f2();
+  weatherBalloon();
+}
+
+  </script>
+
+
+
+<div data-role="page" id="pageweather">
+
+	<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" rel="external" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="index.html#pagetwo" rel="external" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+          <li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+          <li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+				</ul>	
+			</div>
+
+		</div>
+
+<div role="main" class="ui-content" style="justify-content: center;">
+
+<div class="city ">
+
+  <div class="container">
+
+    <div class="city-title ">
+      <span id="location"> </span>
+    </div>
+    <hr />
+    <div class="city-weather-temperature loader">
+      <span id="temp"></span>
+      
+    </div>
+
+    <div class="city-weather-description">
+      <img id="icon"/ >
+      <span id="description"></span>
+    </div>
+
+    
+
+  </div>
+</div>
+
+<br><a rel="external" class="ui-btn" href="weather-menu.html">Back</a>
+</div>
+
+</div>
+
+
+
+
+</body>
+
+</html>

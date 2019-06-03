@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script  src="jquery.js"></script>
+  <script  src="jquery.mobile-1.4.5.js"></script>
+<link rel="stylesheet"  href="jquery.mobile-1.4.5.css">
+  <link rel="stylesheet" href="quiz.css">
+  
+
+
+  
+
+
+  <script type="text/javascript">
+
+
+  document.addEventListener("deviceready", onDeviceReady, false);
+  var db;
+  function onDeviceReady(){
+    db = window.openDatabase("highscoreDB", "1.0", "Highscore", 2*1024*1024);
+    db.transaction(createDB, errorCB, successCB);
+  }
+  function createDB(tx){
+    //tx.executeSql('DROP TABLE IF EXISTS book');
+    tx.executeSql('CREATE TABLE IF NOT EXISTS highscore(id INT, username TEXT, score TEXT)');
+  }
+  function errorCB(err){
+    alert("SQL Error: " +err.code);
+  }
+  function successCB(){
+    alert("Database & Table Created");
+  }
+
+
+  function insertDB(tx){
+    
+    
+    var username_c=$("[name='username']").val();
+    var score_c= $("#scr").text();
+    var sql='INSERT INTO highscore (username, score) VALUES (?,?)';
+    tx.executeSql (sql,[username_c,score_c], successQueryBD, errorCB);
+  }
+
+    /*function que(tx){
+    
+  db.transaction(successQueryBD, errorCB);
+};*/
+  function successQueryBD(tx){
+    alert("record inserted");
+    tx.executeSql('SELECT * FROM highscore ORDER BY score DESC', [], renderListCB, errorCB);
+  }
+  function renderListCB(tx, results){
+    var htmlString = '';
+    var len = results.rows.length;
+
+    
+
+    //$('#example tr').not(':first').not(':last').remove();
+var html = '';
+for(var i = 0; i < len; i++)
+            html += '<tr><td>' + results.rows.item(i).username + 
+                    '</td><td>' + results.rows.item(i).score + '</td></tr>';
+$('#tblscore tbody').append(html);
+
+    
+  }
+
+  function submitForm(){
+    onDeviceReady();
+    db.transaction(insertDB, errorCB);
+    $.mobile.changePage("#pagehighscore", {reverse:false,transition:"slide"});
+    return false;
+  }
+  
+</script>
+
+
+  
+</head>
+<body>
+
+  <div data-role="page" id="pageone">
+<div data-role="header">
+      
+
+      <div data-role="navbar">
+        <ul>
+          <li><a href="index.html" rel="external" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="index.html#pagetwo" rel="external" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+          <li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+          <li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+        </ul> 
+      </div>
+    </div>
+
+    <div role="main" class="ui-content">
+      <div id="home">
+              <h1 style="text-align: center; font-size: 28px;"><br><br>Quick Quiz</h1>
+              <a class="ui-btn" href="#pagequiz">Play</a>
+              <a class="ui-btn" href="#pagehighscore">High Scores</a>
+            </div>
+    </div>
+
+  </div>
+
+<div data-role="page" id="pagequiz">
+<div data-role="header">
+      
+
+      <div data-role="navbar">
+        <ul>
+          <li><a href="index.html" rel="external" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="index.html#pagetwo" rel="external" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+          <li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+          <li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+        </ul> 
+      </div>
+<h1 style="background-color: #444;font-weight: 300; margin: 0px; padding: 10px; font-size: 20px; color: #fff;" >Quiz on Important Facts</h1>
+    </div>
+  
+
+  <div role="main" class="ui-content">
+
+  <div class="quiz-container" >
+    <div id="quiz"></div>
+  </div>
+  <div style="margin-top: 150px;">
+  <button  id="previous">Previous Question</button>
+  
+  <button  id="next">Next Question</button>
+
+  <a class="ui-btn ui"  id="submit" href="#pagreslt">Submit Quiz</a>
+  </div>
+  
+
+</div>
+</div>
+
+<div data-role="page" id="pagreslt" data-dialog="true">
+        <div data-role="header">
+            <h1>User Details</h1>
+        </div>
+
+        <div role="main" class="ui-content">
+                <div id="results"></div>
+                <h1>Score: <span name="score" id="scr"></span></h1> 
+            <form method="post" onsubmit="return submitForm()">
+                
+                <input type="text" name="username" placeholder="Username" value="" data-clear-btn="true">
+
+                <input type="submit" value="submit">
+            </form>
+
+        </div>
+        <a href="index.html" rel="external" class="ui-btn ui-icon-back ui-btn-icon-left">Go back Home</a>
+
+        <div data-role="footer">
+            <h2>User Details Page</h2>
+
+
+        </div>
+
+    </div>
+
+    <div data-role="page" id="pagehighscore" data-dialog="true">
+      <div data-role="header">
+            <h1>Highscores</h1>
+
+        </div>
+        <div data-role="main" class="ui-content">
+          <table id="tblscore" class="display" style="width:100%">
+            <thead>
+              <tr>
+                <th>Username</th>
+                <th>Score</th>
+              </tr>
+            </thead>
+            <tbody>
+            
+            
+            </tbody>
+        <tfoot>
+
+        </tfoot>
+            
+          </table>
+      </div>
+      <a href="index.html" rel="external" class="ui-btn ui-icon-back ui-btn-icon-left">Go back Home</a>
+
+        <div data-role="footer">
+            <h2>Highscore Page</h2>
+
+
+        </div>
+
+       </div>
+       
+
+  <script type="text/javascript">
+
+    
+
+  var score = 0;
+
+  (function() {
+
+  const myQuestions = [
+    {
+      question: "Which year did the Dutch left Mauritius?",
+      answers: {
+        a: "1705",
+        b: "1810",
+        c: "1710",
+        d: "1805"
+      },
+      correctAnswer: "c"
+    },
+    {
+      question: "Which place has the lowest temperature?",
+      answers: {
+        a: "Vacoas",
+        b: "Curepipe",
+        c: "Port-Louis",
+        d: "Rose-Hill"
+      },
+      correctAnswer: "b"
+    },
+    {
+      question: "Which month has the lowest temperature?",
+      answers: {
+        a: "February",
+        b: "March",
+        c: "December",
+        d: "July"
+      },
+      correctAnswer: "d"
+    }
+  ];
+
+  function buildQuiz() {
+    // we'll need a place to store the HTML output
+    const output = [];
+
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // we'll want to store the list of answer choices
+      const answers = [];
+
+      // and for each available answer...
+      for (letter in currentQuestion.answers) {
+        // ...add an HTML radio button
+        answers.push(
+          `<label>
+             <input type="radio" name="question${questionNumber}" value="${letter}">
+              ${letter} :
+              ${currentQuestion.answers[letter]}
+           </label>`
+        );
+      }
+
+      // add this question and its answers to the output
+      output.push(
+        `<div class="slide">
+           <div class="question"> ${currentQuestion.question} </div>
+           <div class="answers"> ${answers.join("")} </div>
+         </div>`
+      );
+    });
+
+    // finally combine our output list into one string of HTML and put it on the page
+    quizContainer.innerHTML = output.join("");
+  }
+
+  function showResults() {
+    // gather answer containers from our quiz
+    const answerContainers = quizContainer.querySelectorAll(".answers");
+
+    // keep track of user's answers
+    let numCorrect = 0;
+
+    // for each question...
+    myQuestions.forEach((currentQuestion, questionNumber) => {
+      // find selected answer
+      const answerContainer = answerContainers[questionNumber];
+      const selector = `input[name=question${questionNumber}]:checked`;
+      const userAnswer = (answerContainer.querySelector(selector) || {}).value;
+
+      // if answer is correct
+      if (userAnswer === currentQuestion.correctAnswer) {
+        // add to the number of correct answers
+        numCorrect++;
+        score++;
+
+        // color the answers green
+        answerContainers[questionNumber].style.color = "lightgreen";
+      } else {
+        // if answer is wrong or blank
+        // color the answers red
+        answerContainers[questionNumber].style.color = "red";
+      }
+    });
+
+    // show number of correct answers out of total
+    resultsContainer.innerHTML = `${numCorrect} correct answer out of ${myQuestions.length}`;
+    scr.innerHTML = `${score}`;
+    score = 0;
+  }
+
+  function showSlide(n) {
+    slides[currentSlide].classList.remove("active-slide");
+    slides[n].classList.add("active-slide");
+    currentSlide = n;
+    
+    if (currentSlide === 0) {
+      previousButton.style.display = "none";
+    } else {
+      previousButton.style.display = "inline-block";
+    }
+    
+    if (currentSlide === slides.length - 1) {
+      nextButton.style.display = "none";
+      submitButton.style.display = "inline-block";
+    } else {
+      nextButton.style.display = "inline-block";
+      submitButton.style.display = "none";
+    }
+  }
+
+  function showNextSlide() {
+    showSlide(currentSlide + 1);
+  }
+
+  function showPreviousSlide() {
+    showSlide(currentSlide - 1);
+  }
+
+  const quizContainer = document.getElementById("quiz");
+  const resultsContainer = document.getElementById("results");
+  const submitButton = document.getElementById("submit");
+
+  // display quiz right away
+  buildQuiz();
+
+  const previousButton = document.getElementById("previous");
+  const nextButton = document.getElementById("next");
+  const slides = document.querySelectorAll(".slide");
+  let currentSlide = 0;
+
+  showSlide(0);
+
+  // on submit, show results
+  submitButton.addEventListener("click", showResults);
+  previousButton.addEventListener("click", showPreviousSlide);
+  nextButton.addEventListener("click", showNextSlide);
+})();
+
+  </script>
+</body>
+</html>

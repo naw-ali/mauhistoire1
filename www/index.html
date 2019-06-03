@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title>History & Geography</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet"  href="menu.css">
+	<script  src="jquery.js"></script>
+	<script  src="jquery.mobile-1.4.5.js"></script>
+	
+	<link rel="stylesheet"  href="jquery.mobile-1.4.5.css">
+
+	<link rel="stylesheet" type="text/css" href="slideshow.css">
+	<script type="text/javascript" src="slideshow.js"></script>
+	<!-- disrupts slide functionality <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>-->
+	
+	<style>
+		/*bottom to top*/
+		#button {
+		  display: inline-block;
+		  background-color: #FF9800;
+		  width: 50px;
+		  height: 50px;
+		  text-align: center;
+		  border-radius: 4px;
+		  position: fixed;
+		  bottom: 30px;
+		  right: 30px;
+		  transition: background-color .3s, 
+		    opacity .5s, visibility .5s;
+		  opacity: 0;
+		  visibility: hidden;
+		  z-index: 1000;
+		}
+		#button::after {
+		  content: "\f077";
+		  font-family: FontAwesome;
+		  font-weight: normal;
+		  font-style: normal;
+		  font-size: 2em;
+		  line-height: 50px;
+		  color: #fff;
+		}
+		#button:hover {
+		  cursor: pointer;
+		  background-color: #333;
+		}
+		#button:active {
+		  background-color: #555;
+		}
+		#button.show {
+		  opacity: 1;
+		  visibility: visible;
+		}
+
+
+
+
+
+		@media (min-width: 500px) {
+  		.control_next{
+  			margin-left: 18%;
+  		}
+  		#button {
+		    margin: 30px;
+		  }
+		}
+
+		/*bottom to top ends here*/
+
+		/*Button codes start here!*/
+		.ui-content .btn-group button {
+		  background-color: #4CAF50; /* Green background */
+		  border: 1px solid green; /* Green border */
+		  color: white; /* White text */
+		  padding: 10px 24px;
+		  cursor: pointer; /* Pointer/hand icon */
+		  width: 50%; /* Set a width if needed */
+		  display: block; /* Make the buttons appear below each other */
+		  margin-left: auto;
+		  margin-right: auto;
+		}
+
+		.ui-content .btn-group button:not(:last-child) {
+		  border-bottom: none; /* Prevent double borders */
+		}
+
+		/* Add a background color on hover */
+		.ui-content .btn-group button:hover {
+		  background-color: #3e8e41;
+		  color: white;
+		}
+
+		@media only screen and (min-width:321px) and (max-width:480px){
+			.ui-content .btn-group button {
+				width: 80%;
+			}
+		 }
+		/*Button codes end here!*/
+
+		/*accordion codes start here!*/
+		.accordion {
+		  background-color: #eee;
+		  color: #444;
+		  cursor: pointer;
+		  padding: 18px;
+		  width: 100%;
+		  border: none;
+		  text-align: left;
+		  outline: none;
+		  font-size: 15px;
+		  transition: 0.4s;
+		}
+
+		.active, .accordion:hover {
+		  background-color: #ccc;
+		}
+
+		.accordion:after {
+		  content: '\002B';
+		  color: #777;
+		  font-weight: bold;
+		  float: right;
+		  margin-left: 5px;
+		}
+
+		.active:after {
+		  content: "\2212";
+		}
+
+		.panel {
+		  padding: 0 18px;
+		  background-color: white;
+		  max-height: 0;
+		  overflow: hidden;
+		  transition: max-height 0.2s ease-out;
+		}
+		/*accordion codes end here!*/
+
+
+		/* images codes start here!*/
+		* {
+		  box-sizing: border-box;
+		}
+
+		.column {
+		  float: left;
+		  width: 33.33%;
+		  padding: 5px;
+		}
+
+		/* Clearfix (clear floats) */
+		.row::after {
+		  content: "";
+		  clear: both;
+		  display: table;
+		}
+
+		/* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+		@media screen and (max-width: 500px) {
+		  .column {
+		    width: 100%;
+		  }
+		}
+
+		/*images codes end here!*/ 
+
+
+
+		/*button splash screen start here!*/
+		.button {
+		  background-color: grey;
+		  border: none;
+		  color: black;
+		  padding: 10px 20px;
+		  text-align: center;
+		  text-decoration: none;
+		  display: inline-block;
+		  margin: 4px 2px;
+		  cursor: pointer;
+		  border-radius: 16px;
+		}
+
+		.button:hover {
+		  background-color: #f1f1f1;
+		}
+		/* buttons splash screen end here!*/
+	</style>
+
+	<script>
+// Bind an event to window.orientationchange that, when the device is turned,
+// gets the orientation and displays it to on screen.
+$( window ).on( "orientationchange", function( event ) {
+  $( "#orientation" ).text( "This device is in " + event.orientation + " mode! (Tap to hide)" );
+});
+ 
+// You can also manually force this event to fire.
+$( window ).orientationchange();
+</script>
+
+</head>
+
+<body>
+	<div data-role="page" id="pageone" data-theme="a">
+
+		<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+					<li><a href="#pagetwo" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+					<li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+					<li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+				</ul>	
+			</div>
+
+		</div>
+
+		<script>
+			$(document).on("pagecreate","#pageone",function(){
+  				$("#orientation").on("tap",function(){
+    			$(this).hide();
+  				});                       
+			});
+		</script>
+
+		<div>
+
+			<center><p id="orientation">orientationchange Not Supported on this Device. (Tap to hide)</p></center>
+
+		</div>
+
+
+		<div data-role="panel" id="right-panel" data-display="overlay"  data-position="right" data-theme="a">
+        <div data-role="collapsible" data-collapsed="false" id="number1">
+        <h3>App Info</h3>
+
+				<h3 style="text-align: left;">This app was created by TORUL Dhanesh Kumar & NAUZEER Mohammad Nawfal Ali</h1>
+				<h4>Copyright &copy; 2019 MauHistoire. All rights reserved.</h2>
+	
+      </div>
+
+
+        <a href="#" data-rel="close" data-role="button" data-mini="true" data-inline="true" data-icon="delete" data-iconpos="right">Close</a>
+    </div><!-- /panel -->
+
+    <script>
+
+$( document ).on( "pageinit", "#pageone", function() {
+    $( document ).on( "swipeleft", "#pageone", function( e ) {
+        // We check if there is no open panel on the page because otherwise
+        // a swipe to close the left panel would also open the right panel (and v.v.).
+        // We do this by checking the data that the framework stores on the page element (panel: open).
+        if ( $.mobile.activePage.jqmData( "panel" ) !== "open" ) {
+            if ( e.type === "swipeleft"  ) {
+                $( "#right-panel" ).panel( "open" );
+            } 
+        }
+    });
+});
+
+</script>
+
+		<div role="main" class="ui-content" style="background-color: #FFFF66;">
+
+			
+			
+			<h1 style="text-align: center; font-size: 28px; margin-bottom: 1rem;">SOCIAL, SCIENTIFIC AND ENVIRONMENTAL EDUCATION</h1>
+			<center><img style="height: 107px;width: 100px;" src="images/globe2.gif" alt="Aapravasi-Ghat" style="width:100%">
+			</center>
+			
+		</div>
+		
+		<div role="main" class="ui-content" style="background-color: #FFFF66;">
+			<button class="button" onclick="parent.location='#pagetwo'">GET STARTED</button>
+		</div>
+
+		<!--codes for slideshow start here-->
+		<div><center>
+			<div id="slider"  style="">
+			  <a href="#"  class="control_next">></a>
+			  <a href="#"  class="control_prev"><</a>
+			  <ul>
+			    <li style="background-image: url('images/museum.jpg'); background-size: 100% 100%;"></li>
+			    <li style="background-image: url('images/solar-system.jpg');"></li>
+			    <li style="background-image: url('images/immigrants.jpg'); background-size: 100% 100%;"></li>
+			  </ul>  
+			</div>
+		</center>
+		</div>
+		<!-- codes for slideshow end here-->
+
+
+	<div data-role="footer">
+			<h1>Home</h1>
+		</div>
+
+
+	</div>
+
+
+	<div data-role="page" id="pagetwo" data-theme="a">
+
+		<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+					<li><a href="#pagetwo" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+					<li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+					<li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+			</div>
+		</div>
+
+		<br>
+		  <div data-role="main" class="portfolio">
+		  	<div style="; border: solid;">
+		  		<center><h2>Grades</h2></center>
+    <ul id="gallery">
+    	<li><a href="notes.html" rel="external" class="atxt"><img src="images/num4.jpg" alt="" />Grade 4</a></li>
+      	<li><a href="notes.html" rel="external" class="atxt"><img src="images/num5.jpg" alt="" />Grade 5</a></li>
+      	<li><a href="notes.html" rel="external" class="atxt"><img src="images/num6.jpg" alt="" />Grade 6</a></li>
+      
+      
+    </ul>
+	</div>
+<br>
+			  	<div style="; border: solid;">
+			  		<center><h2>Our Heritage</h2></center>
+			  		
+    <ul id="gallery">
+      <li><a href="#pagehistory"  class="atxt"><img src="images/historical-places.jpg" alt="" />Historical Places</a></li>
+      <li><a href="#pagehistory"  class="atxt"><img src="images/the-oberoi-mauritius.jpg" alt="" />Nature Reserves</a></li>
+      <li><a href="#pagehistory"  class="atxt"><img src="images/worship-places.jpg" alt="" />Places of worship</a></li>
+      <li><a href="#pagehistory"  class="atxt"><img src="images/mountains.jpg" alt="" />Mountains</a></li>
+      <li><a href="#pagehistory"  class="atxt"><img src="images/caves.jpg" alt="" />Caves</a></li>
+      <li><a href="#pagehistory"  class="atxt"><img src="images/monuments.jpg" alt="" />Monuments</a></li>
+      
+      
+    </ul>
+	</div>
+
+  </div>
+  <br>
+		<!--<div data-role="main" class="ui-content">
+			<div class="btn-group">
+				<button onclick="parent.location='#pagehistory'">Historical Places</button>
+				<button>Nature Reserves</button>
+				<button>Places of worship</button> 
+			</div>
+		</div>
+		-->
+		<div data-role="footer">
+			<h1>Menu</h1>
+		</div>
+		
+
+	</div>
+
+	<!--<div data-role="page" id="pagethree" data-theme="a">
+
+		<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="#pageone" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+					<li><a href="#pagetwo" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+					<li><a href="#pagethree" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+			</div>
+		</div>
+
+		<div data-role="main" class="ui-content">
+			<p>nsnsnsns</p>
+
+		</div>
+
+
+		<div data-role="footer">
+			<h1>footer</h1>
+		</div>
+		
+
+	</div>-->
+
+	<script>
+		
+		window.onload = function f1(){
+		// Check browser support
+		if (typeof(Storage) !== "undefined") {
+  		// Store
+  			localStorage.setItem("desc", "A UNESCO World Heritage Site, Aapravasi Ghat, or Immigration Depot, is a complex of buildings which were used back in the day for bonded labourers from India. The place, located on the seaside, now houses an interpretation centre. Guided tours help gain more knowledge about different structures and remains found here. Life-size models are also added to the paraphernalia, making the place more real and striking. One of the most significant historical places in Mauritius, the depot holds a mirror to the past and practices of colonialism. Between the years 1850 to 1923, almost five hundred thousand people were brought here to be shipped to different colonies of Britain around the globe.");
+  		// Retrieve
+  			document.getElementById("aapra").innerHTML = localStorage.getItem("desc");
+		} else {
+  			document.getElementById("aapra").innerHTML = "Sorry, your browser does not support Web Storage...";
+		}
+	}
+
+	</script>
+
+	<div data-role="page" id="pagehistory" data-theme="a">
+
+		<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+					<li><a href="#pagetwo" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+					<li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+					<li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+			</div>
+		</div>
+
+		<div data-role="main" class="ui-content">
+
+			<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+			<link href="https://fonts.googleapis.com/css?family=Merriweather:400,900,900i" rel="stylesheet">
+			<!-- Back to top button -->
+			<a id="button"></a>
+
+			
+
+
+      <div data-role="collapsible" id="number1">
+        <h3>Aapravasi Ghat</h3>
+        <img height="150" width="100"src="images/Aapravasi-Ghat.jpg" alt="Aapravasi-Ghat" style="width:100%">
+
+					<p id="aapra" style="text-align: justify;">
+					</p>
+
+					<a rel="external" class="ui-btn" href="location.html?long=-20.15868&lat=57.50291">View Map</a>
+      </div>
+      
+      <div data-role="collapsible" id="number1">
+        <h3>Baie De l'Arsenal / Arsenal Bay</h3>
+        <img height="150" width="100" src="images/Arsenal-Bay.jpg" alt="Arsenal-Bay" style="width:100%">
+
+				<p style="text-align: justify;">The ruins of a French Arsenal can be found in this bay area known as Arsenal Bay, located in the north of the country. One of the lesser known historical places of Mauritius, the village of Arsenal was home to a French foundry, which produced cannons and all other kinds of military supplies. However, it was destroyed back in 1774 due to an explosion killing around 300 slaves.</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.083721&lat=57.513823">View Map</a>
+      </div>
+
+      <div data-role="collapsible" id="number1">
+        <h3>St Aubin House</h3>
+        <img height="150" width="100" src="images/Aubin-House.jpg" alt="Aubin-House" style="width:100%">
+
+			  	<p style="text-align: justify;">One of the best historical places in Mauritius, the plantation of St. Aubin goes back almost two hundred years. The factory was shifted in the seventies and the estate no longer deals in sugar. However, the lawns of this huge house are now home to a rum distillery. There is a vanilla house, spice garden, tropical garden here as well.</p>
+
+			  	<a rel="external" class="ui-btn" href="location.html?long=-20.51019&lat=57.54443">View Map</a>
+
+      </div>
+
+      <div data-role="collapsible" id="number1">
+        <h3>Beau Plan Sugar Mill / Aventure Du Sucre</h3>
+        <img height="150" width="100" src="images/Beau-Plan.jpg" alt="Beau-Plan" style="width:100%">
+
+				<p style="text-align: justify;">Another sugar factory, the Beau Plan serves as a museum, placing it on every list of top historical places in Mauritius. The exhibition here covers the tale of sugar, crisscrossing with the history of the island, rum trade as well as the practice of slavery.
+
+					The tour will take anywhere from two to three hours. The factory itself was started back in 1797, and it was closed down on the turn of the century in 1999. The museum also has videos as well as interactive sessions where you can gain more knowledge about the history of the place.
+					</p>
+
+					<a rel="external" class="ui-btn" href="location.html?long=-20.099179&lat=57.577738">View Map</a>
+      </div>
+   
+
+      <div data-role="collapsible" id="number1">
+        <h3>Martello Tower</h3>
+        <img height="150" width="100" src="images/Martello-Tower.jpg" alt="Martello-Tower" style="width:100%">
+
+				<p style="text-align: justify;">The five towers were built back in 1800’s by the British to protect their colony from the French, who apparently were trying to instigate the slaves. The tower located at La Preneuse is now serving as a museum where experts explain the incredible architecture of the towers. Apparently, these towers are all three metres thick, with copper cannons which could shoot at a range of about 2 kilometres.</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.354582&lat=57.361840">View Map</a>
+      </div>
+
+
+      <div data-role="collapsible" id="number1">
+        <h3>Eureka House</h3>
+        <img height="150" width="100" src="images/Eureka-House.jpg" alt="Eureka-House" style="width:100%">
+
+				<p>Built in the early 1800’s as a grand mansion, this place is a museum now, providing an insight into the colonial past of the country. The house itself bears characteristics of tropical architecture with about 109 doors and a large number of rooms to keep the place cool even in scorching summers. The place houses many antiques, pieces of furniture and maps dating back to French East India Company along with servant quarters and kitchens</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.218553&lat=57.497544">View Map</a>
+      </div>
+
+
+      <div data-role="collapsible" id="number1">
+        <h3>Le Morne</h3>
+        <img height="150" width="100" src="images/Le-Morne.jpg" alt="Le-Morne" style="width:100%">
+
+				<p style="text-align: justify;">Another UNESCO World Heritage Site, the place is undoubtedly one of the most famous places of historical interest in Mauritius. It is simply a mountain located southwest of the island, which provided shelter to a number of slaves who dared to run away from their masters back in the day. Given the place’s dangerous, inaccessible topography, the slaves who got away created their own communities here and stayed in the caves. The place is a huge symbol of their fight for freedom and the uncrushable human spirit.</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.4515&lat=57.3134">View Map</a>
+      </div>
+
+      <div data-role="collapsible" id="number1">
+        <h3>Matthew Flinders Monument</h3>
+        <img height="150" width="100" src="images/Matthew-Flinders.jpg" alt="Matthew-Flinders Monument" style="width:100%">
+
+				<p style="text-align: justify;">Built only 15 years back in 2003, this is one of the few historical monuments in Mauritius. The place is dedicated to Matthew Flinders, the English cartographer and explorer, who first identified Australia as a continent. It commemorates the two hundredth anniversary of his arrival in the country. Interestingly, when he first arrived on the island, he got imprisoned for six years as England and France were at war.</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.490627&lat=57.371185">View Map</a>
+      </div>
+
+      <div data-role="collapsible" id="number1">
+        <h3>Citadel Fort</h3>
+        <img height="150" width="100" src="images/Citadel-Fort.jpg" alt="Citadel-Fort" style="width:100%">
+
+				<p style="text-align: justify;">Also known as Fort Adelaide, this military building was built by the British back in the nineteenth century. You can enjoy panoramic views of the capital, Port Louis, as well as the harbour from the top. The barracks of the old times have been converted into boutiques where you can pick souvenirs up from.</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.163494&lat=57.510247">View Map</a>
+      </div>
+
+
+      <div data-role="collapsible" id="number1">
+        <h3>La Route du The (Bois Cheri)</h3>
+        <img height="150" width="100" src="images/tea-plantation.jpg" alt="Bois Cheri" style="width:100%">
+
+				<p style="text-align: justify;">Bois Cheri is a famous tea plantation, which is one of three most prominent stops on La Route du Thé. Located around twelve kilometres from the famous Rivière des Anguilles, these tea gardens cover an area of about 250 hectares. You can book a tour of the premises where you will get to know in deep about the history as well as the functioning of the plantation, making it one of the must-visit historical places in Mauritius.
+
+				There is an exhibition space here as well, showcasing the centuries of history of this place. 
+				</p>
+
+				<a rel="external" class="ui-btn" href="location.html?long=-20.480552&lat=57.559884">View Map</a>
+      </div>
+
+      <br><a rel="external" class="ui-btn" href="index.html#pagetwo">Back</a>
+
+
+		<div data-role="footer">
+			<h1>Historical Places</h1>
+		</div>
+		
+
+	</div>
+</div>
+
+	<!--nature reserves codes start here-->
+	<div data-role="page" id="nature-reserves" data-theme="a">
+
+		<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+					<li><a href="#pagetwo" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+					<li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+					<li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+			</div>
+		</div>
+
+		<div data-role="main" class="ui-content">
+			<button class="accordion">Black River Gorges National Park</button>
+			<div class="panel">
+
+					<img height="150" width="100"src="images/black-river.jpg" alt="Black River Gorges National Park" style="width:100%">
+
+					<p style="text-align: justify;">Arguably the most famous of the three national parks of Mauritius (the other two being Bras d'Eau National Park and the Islets National Park), Black River Gorges National Park, which is located in the southwest of the island, is an absolute must-visit. It’s also the biggest nature reserve in Mauritius at 67.5 square kilometres. This gorgeous, lush, undulating park is home to a huge section of Mauritius’ rainforest, some of the rarest birds and plant species in the world—it has over 300 species of endemic and indigenous flowering plants—as well as a troop of mischievous monkeys. 
+					</p>
+
+			</div>
+
+			<button class="accordion">Frederica Nature Reserve</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/frederica.jpg" alt="Frederica Nature Reserve" style="width:100%">
+
+				<p style="text-align: justify;">Another of the nature parks of Mauritius located in the southwest of the island, the Frédérica Nature Reserve spans an area of 1300 hectare. Managed by the Mauritius Wildlife Foundation and the Bel Ombre Estate on which it is located, this wonderful nature park offers a host of exciting activities that include mountain biking excursions, quad biking, ‘discovery’ tours for kids as well as extraordinary hikes to some of the waterfalls in the area, which also allow visitors to take in the full extent of the incredible biodiversity in this park.</p>
+			</div>
+
+			<button class="accordion">La Vallee des Couleurs</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/vallee.jpg" alt="La Vallee des Couleurs" style="width:100%">
+
+			  	<p style="text-align: justify;">Mauritius is famous for its seven coloured volcanic earth in Chamarel but what many people don’t know, is that in the 90s, a remarkable site with over 23 different colours of sand was discovered which was named La Vallée des Couleurs. This extraordinary reserve, situated in Rivière des Anguilles, shows signs of this extraordinarily coloured earth almost everywhere you go. There is also a range of wonderful activities on offer, from zip lines (the longest zip line in the Indian Ocean and the third longest zip line in the world is here) and hiking routes to quad biking and a Nepalese Bridge, there’s a range of activities for wild-hearted explorers.</p>
+			</div>
+
+			<button class="accordion">Casela World of Adventures</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/casela.jpg" alt="Bcasela" style="width:100%">
+
+				<p style="text-align: justify;">Situated in the west of the island, Casela World of Adventures is by far one of the most popular adventure/nature parks of Mauritius. This phenomenal park—which deserves at least a solid day to explore—unfolds over 14 hectares and offers guests a variety of different ‘kingdoms’ to explore. Here you can discover over 1500 species of birds and spectacular African mammals that include lions, zebras, monkeys as well as the likes of tigers and tortoises. Pre- or post-safari visitors can indulge in segway rides, go canyoning, try zip lining or simply make the most of the wildlife at the petting zoos, on photo safaris or even by walking with lions. On-site, Casela also has a restaurant and bar which offers a host of different dishes inspired by various cuisines (namely European, Asian and Mauritian).
+				</p>
+			</div>
+			
+			<button class="accordion">Chamarel Adventure Park</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/chamarel.jpg" alt="chamarel" style="width:100%">
+
+				<p style="text-align: justify;">In and around the quaint village of Chamarel there are a number of tourist hot spots, two of the most famous being the Chamarel waterfall and the Seven Coloured Earth reserve, which are definitely worth visiting. There is, however, another park, immersed in the beautiful surrounds of this stunning tropical area; the Chamarel Adventure Park. Adventure lovers can enjoy an array of exciting activities that range from a botanical track and an obstacle course to zip lines and tightropes courses.</p>
+			</div>
+
+
+			<button class="accordion">La Vanille Crocodile Farm</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/crocodile-park.jpg" alt="crocodile-park" style="width:100%">
+
+				<p>A special nature park set in the south of Mauritius, the Vanille Crocodile Farm is spread over 3.5 hectares of vivid lush vegetation. This farm—which is home to different species of tortoises, bullfrogs, iguanas and donkeys and impressive insectariums (or insect zoos) and, naturally, crocodiles—was the first crocodile farm in Mauritius, where these dinosaur-like creatures were reared, originally for their skin. A wonderful outing for the whole family, there is also a restaurant on the property that includes crocodile dishes on their menu and a boutique that sells products made from hardy crocodile leather.</p>
+			</div>
+
+
+			<button class="accordion">Ile aux Aigrettes</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/ile-aux-aigrettes.jpg" alt="ile-aux-aigrettes" style="width:100%">
+
+				<p style="text-align: justify;">This very special nature park of Mauritius allows visitors the rare glimpse into what the island and the ecosystem really might have looked like before man set foot on it. This extraordinary nature reserve located just off the southeast coast of Mauritius was declared a nature reserve in 1965 and is managed by the Mauritian Wildlife Foundation (MWF). 
+
+				An incredible amount of work has gone into restoring the 26-hectare coral island to its former glory (or as close to it as possible), as the MWF worked to remove exotic species and allow the natural vegetation to recover and thrive. The organisation has also reintroduced certain bird and tortoise species, all of which contributes to a fabulous natural destination that is well worth exploring.</p>
+			</div>
+
+			
+
+		</div>
+
+
+		<div data-role="footer">
+			<h1>Nature Reserves</h1>
+		</div>
+		
+
+	</div>
+	<!--nature-reserves codes end here!-->
+
+	<!--Places of worship codes start here-->
+	<div data-role="page" id="worship-places" data-theme="a">
+
+		<div data-role="header">
+			
+
+			<div data-role="navbar">
+				<ul>
+					<li><a href="index.html" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+					<li><a href="#pagetwo" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+					<li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+					<li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+			</div>
+		</div>
+
+		<div data-role="main" class="ui-content">
+			<button class="accordion">Ganga Talao Sacred Lake</button>
+			<div class="panel">
+
+					<img height="150" width="100"src="images/ganga-talao.jpg" alt="ganga-talao" style="width:100%">
+
+					<p style="text-align: justify;">This most sacred Hindu place and pilgrimage site for the MahaShivaratree celebrations, Grand Bassin is guarded by two impressive statues at the entry. According to the legend, someone has poured water from the Ganges back in the 1970’s, making it a sacred lake. It is a peaceful and yet curious place for those who are not used to Hindu culture and its profusion of temples, statues, incense smoke, fish, giant eels and monkeys… A little piece of India full of emotion and mystery to visit absolutely! 
+					</p>
+
+			</div>
+
+			<button class="accordion">Jummah Masjid Mosque</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/jummah-masjid.jpg" alt="jummah-masjid" style="width:100%">
+
+				<p style="text-align: justify;">Built in the middle of the 1800’s, the Jummah Masjid Mosque is situated in the heart of Port Louis, on Queen Street. This majestic edifice cannot go unnoticed with its tall white façades and elegant sculptures. We recommend that you go around the building before you enter it. Inside, it is peaceful and green – a quiet retreat from the bustle of the city and an ideal place for praying. This mosque, which is close to China Town, stands as a token of the island’s cultural diversity.</p>
+			</div>
+
+			<button class="accordion">Kwan Tee Pagoda</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/pagoda.jpg" alt="pagoda" style="width:100%">
+
+			  	<p style="text-align: justify;">Chinese Mauritians represent only 3% of the general population, but the heritage of their ancestors is still visible, especially in Port Louis. If you did not already know, there are 11 pagodas on the island, all located in the capital city, and the oldest – Kwan Tee Pagoda – is found in Les Salines. Built in 1842, it is the oldest temple of the city and of the southern hemisphere. Inspired by traditional Chinese pagodas, this holy place is attended by devotees who come to ask for protection.</p>
+			</div>
+
+			<button class="accordion">Kaylasson Temple</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/kaylasson.jpg" alt="kaylasson" style="width:100%">
+
+				<p style="text-align: justify;">till in the vicinity of Port Louis – in Sainte Croix more precisely – you will find the oldest Tamil temple of Mauritius, which was first built in 1854. It is actually the major place of worship for the Tamil community of Mauritius and a heritage-listed site. More interesting is the architecture of the temple, which reflects the parts of a human body, with six stations representing different organs and the lotus as the head. Such an analogy is meant to teach devotees to respect the temple as much as their own body.
+				</p>
+			</div>
+			
+			<button class="accordion">The Chapel of Cap Malheureux</button>
+			<div class="panel">
+
+				<img height="150" width="100" src="images/chapel.jpg" alt="chapel" style="width:100%">
+
+				<p style="text-align: justify;">You cannot miss it! Located on the seafront, the chapel of Cap Malheureux has become an item because of its flaming red roof beautifully contrasting with the blue of the sky and the sea. If you go there on a Sunday, you may attend the church service and listen to religious songs while observing the simple and picturesque life of this chapel. If you are looking for a picture-postcard view, that is the place to be. Hopefully, you will meet some fishermen returning from sea with plenty of fish to sell.</p>
+			</div>
+
+		
+
+		</div>
+
+
+		<div data-role="footer">
+			<h1>Places of Worship</h1>
+		</div>
+		
+
+	</div>
+
+
+
+	<script>
+			var acc = document.getElementsByClassName("accordion");
+			var i;
+
+			for (i = 0; i < acc.length; i++) {
+			  acc[i].addEventListener("click", function() {
+			    this.classList.toggle("active");
+			    var panel = this.nextElementSibling;
+			    if (panel.style.maxHeight){
+			      panel.style.maxHeight = null;
+			    } else {
+			      panel.style.maxHeight = panel.scrollHeight + "px";
+			    } 
+			  });
+			}
+			</script>
+
+	<script type="text/javascript">
+	var btn = $('#button');
+	jQuery(document).ready(function ($) {
+	$(document).scroll(function() {
+	  if ($(document).scrollTop() > 300) {
+	    btn.addClass('show');
+	  } else {
+	    btn.removeClass('show');
+	  }
+	});
+	});
+
+	btn.on('click', function(e) {
+	  e.preventDefault();
+	  $('html, body').animate({scrollTop:0}, '300');
+	});		
+</script>
+
+</body>
+
+
+
+
+</html>

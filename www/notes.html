@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<script  src="jquery.js"></script>
+	<script  src="jquery.mobile-1.4.5.js"></script>
+	
+	<link rel="stylesheet"  href="jquery.mobile-1.4.5.css">
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+
+
+</head>
+
+<body>
+
+  <div data-role="page" id="pageone" data-theme="a">
+
+    <div data-role="header">
+      
+
+      <div data-role="navbar">
+        <ul>
+          <li><a href="index.html" rel="external"  style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="index.html#pagetwo" rel="external" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+          <li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+          <li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+        </ul> 
+      </div>
+
+    </div>
+
+
+    <div role="main" class="ui-content">
+      
+
+ <div id="tabs">
+
+ 	<div class="w3-row" >
+ 		<ul>
+	    <li style="display: inline; "><a href="#tabs-1" style=""  >
+	      <div class="col-sm-4 col-xs-4" >| Grade 4 |</div>
+	    </a></li>
+	    <li style="display: inline;"><a href="#tabs-2" style="" >
+	      <div class="col-sm-4 col-xs-4">| Grade 5 |</div>
+	    </a></li>
+	    <li style="display: inline;"><a href="#tabs-3" style="">
+	      <div class="col-sm-4 col-xs-4">| Grade 6 |</div>
+	    </a></li>
+	</ul>
+
+	</div>
+
+<br><br>
+  <div id="tabs-1">
+    <h2>Weather</h2>
+		  <div style="height: 50%;">
+		    <p>
+		    Weather is what we observe outside about the sun, cloud, rain, temperature and wind. The weather may change from time to time and from day to day. The study of weather is called <strong>meteorology.</strong>
+
+		    Types of weather:
+
+		    <br><br><img height="150" width="100" src="images/types-weather.jpg" alt="Weather" style="width:85%; height: 70%;"><br><br>
+
+		    Everyday we receive weather news on radio and television. <br>
+		    To obtain information about the weather, different instruments are used.<br><br><br>
+
+		    A <strong>thermometer</strong>is used to measure temperature.<br>
+		    A <strong>wind vane</strong> is used to show wind direction.
+
+		    <br><br><img height="150" width="100" src="images/weather-instr.jpg" alt="Weather" style="width:85%; height: 70%;">
+		    </p>
+		  </div>
+
+  </div>
+  <div id="tabs-2">
+    <h2>Maps</h2>
+		  <div>
+		    <p>
+		    The sun rises in the east. At midday, the sun is in the middle. In the afternoon, the sun always sets in the west. <br>
+
+		    <br><img height="150" width="100" src="images/mauritius_location_map.png" alt="Maps" style="width:85%; height: 70%;"><br>
+			</p>
+		  </div>
+  </div>
+  <div id="tabs-3">
+    <h2>Locality</h2>
+		  <div>
+		    <p>
+		    The <strong>locality</strong> is the place or local area where we live. Schools and other buildings such as houses and shops are found there. Many people live and work in the locality.
+
+		    <br><br>Types of weather:
+
+		    <br><br><img height="150" width="100" src="images/locality.jpg" alt="Locality" style="width:85%; height: 70%;"><br><br>
+
+
+		    In villages and towns, there are busy roads. Many vehicles use these roads. We should be very careful on the road.<br><br><br>
+
+		    Road signs:<br><br>
+
+		    <img height="150" width="100" src="images/road-signs.jpg" alt="Locality" style="width:85%; height: 100%;">
+		    </p>
+		    <!--<ul>
+		      <li>List item one</li>
+		      <li>List item two</li>
+		      <li>List item three</li>
+    		</ul>-->
+		  </div></p>
+  </div>
+</div>
+<br><a rel="external" class="ui-btn" href="index.html#pagetwo">Back</a>
+
+<script>
+  $( function() {
+    $( "#tabs" ).tabs();
+  } );
+  </script>
+
+</div>
+
+
+</body>
+
+
+</html>

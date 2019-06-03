@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script  src="jquery.js"></script>
+<script  src="jquery.mobile-1.4.5.js"></script>
+<link rel="stylesheet"  href="jquery.mobile-1.4.5.css">
+
+<link rel="stylesheet" href="leaflet/leaflet.css"/>
+<script src="leaflet/leaflet.js"></script>
+<link rel="stylesheet" href="leaflet/leaflet-routing-machine.css"/>
+<script src="leaflet/leaflet-routing-machine.js"></script>
+<script>
+
+
+</script>
+
+</head>
+
+<body>
+
+  <div data-role="page" id="pageone" data-theme="a">
+
+    <div data-role="header">
+      
+
+      <div data-role="navbar">
+        <ul>
+          <li><a href="index.html" style="background-color: tomato;" class="ui-btn ui-icon-home ui-btn-icon-top">Home</a></li>
+          <li><a href="#pagetwo" style="background-color: #3982dc;" class="ui-btn ui-icon-grid ui-btn-icon-top">Menu</a></li>
+          <li><a href="weather-menu.html" style="background-color: #f1f105c9;" rel="external" class="ui-btn ui-icon-home ui-btn-icon-top">Weather</a></li>
+          <li><a href="quiz.html" style="background-color: #1aa91a;" rel="external" class="ui-btn ui-icon-edit ui-btn-icon-top">Quiz</a></li>
+        </ul> 
+      </div>
+
+    </div>
+    <div role="main" class="ui-content">
+      <div id="mapid" style="width: 100%; height: 600px;"></div>
+
+      <a rel="external" class="ui-btn" href="index.html#pagehistory">Back</a>
+    </div>
+  </div>
+ 
+ <!--<button onclick="getLocation();">Get Direction</button>-->
+
+ <script>
+
+var longitude;
+var latitude;
+
+/*
+
+var curLatitude;
+var curLongitude;
+
+function getLocation() {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+  } else { 
+    alert('No GeoLoc available');
+  }
+}
+
+function showPosition(position) {
+  curLatitude = position.coords.latitude;
+  curLongitude = position.coords.longitude;
+  alert('curLatitude =' + curLatitude);
+  alert('curLongitude =' + curLongitude);
+}
+*/
+
+function f2()
+{
+  
+
+
+  var param = window.location.href.split( '?' );
+  var loc = param[1].split('&');
+  var long = loc[0].split('=');
+  
+  longitude = long[1];
+  var lat = loc[1].split('=')
+  
+  latitude = lat[1];
+
+};
+
+
+
+
+
+window.onload = function f1(){
+
+f2();
+alert(longitude);
+alert(latitude);
+
+var mymap = L.map('mapid').setView([longitude, latitude], 18);
+L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+maxZoom: 22,
+attribution: 'Map data &copy;'+
+'<a href="https://www.openstreetmap.org/">OpenStreetMap</a>'+
+'contributors,<a href="https://creativecommons.org/licenses'+
+'/by-sa/2.0/">CC-BY-SA</a>,Imagery © <a href="https://'+
+'www.mapbox.com/">Mapbox</a>',
+id: 'mapbox.streets',
+accessToken:'pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYyc'+
+ 'XBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw'
+}).addTo(mymap);
+
+
+var marker = L.marker([longitude, latitude]).addTo(mymap);
+marker.addTo(mymap);
+var circle = L.circle([longitude, latitude], {
+    color: 'red',
+    fillColor: '#f03',
+    fillOpacity: 0.5,
+    radius: 10
+}).addTo(mymap);
+
+//getLocation();
+/*
+var routing = L.Routing.control({
+    waypoints: [
+        L.latLng(57.513574399999996, -20.3055104),
+        L.latLng(57.50291, -20.15868)
+    ],
+    routeWhileDragging: true
+}).addTo(mymap);
+*/
+} 
+
+
+
+
+
+ </script>
+</body>
+
+
+</html>

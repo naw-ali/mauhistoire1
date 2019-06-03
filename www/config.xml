@@ -1,0 +1,12 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.dkt.evs" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+    <name>MauHistoire</name>
+    <description>
+        An interesting app.
+    </description>
+    <author email="nawfal.nauzeer3@gmail.com" href="http://phonegap.com">
+        Nauzeer Mohammad Nawfal Ali
+    </author>
+    <content src="index.html" />
+    <access origin="*" />
+</widget>

@@ -1,0 +1,99 @@
+/* =============================================================================
+   PORTFOLIO/GALLERY
+   ========================================================================== */
+
+.atxt {
+	color: red;
+	text-align: center;
+	text-decoration: none;
+}
+
+.slider .flexslider {
+	background:none;
+	border:none;
+}
+.gallery h4 {
+	font-style:italic;
+}
+.portfolio h4 {
+	font-style:italic;
+	font-family:'Lato', sans-serif;
+	font-size:0.8em;
+	font-weight:600;
+}
+p.gallery {
+	margin-top:25px;
+}
+p.gallery a.ui-link {
+	color:#695468;
+	text-transform:uppercase;
+	font-size:0.8em;
+}
+p.gallery a.ui-link:visited {
+	color:#695468;
+}
+ul.portfolioCat {
+	width:100%;
+	margin-bottom:20px;
+	margin-left:-40px;
+}
+ul.portfolioCat li {
+	font-size:14px;
+	text-transform:uppercase;
+}
+ul.portfolioCat li a.ui-link {
+	border:1px solid #efefef;
+	display:block;
+	line-height:25px;
+	text-align:center;
+	color:#695468;
+	background: rgba(255, 255, 255, 0.6);
+	border:#efefef solid 1px;
+	padding:5px 0;
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+	cursor:pointer;
+}
+ul.portfolioCat li a:hover {
+	background: rgba(255, 255, 255, 0.4);
+}
+ul.portfolioCat li a.ui-link:visited {
+	color:#695468;
+}
+#gallery {
+	list-style: none;
+	padding: 0;
+	margin:20px 0 0 0;
+}
+#gallery:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+#gallery li {
+	float: left;
+	width: 33.33333333%;
+}
+#gallery li a {
+	display: block;
+	margin: 5px;
+	border: 1px solid #fff;
+}
+#gallery li img {
+	display: block;
+	width: 100%;
+	height: auto;
+}
+#gallery img {
+	-webkit-box-shadow: 0px 0px 4px #979898;
+	-moz-box-shadow: 0px 0px 4px #979898;
+	box-shadow: 0px 0px 4px #979898;
+}
+
+
+
